@@ -109,42 +109,42 @@
   </data>
  </layer>
  <objectgroup id="3" name="Objects">
-  <object id="5" gid="1020" x="32" y="80" width="16" height="16">
+  <object id="5" name="door" gid="1020" x="32" y="80" width="16" height="16">
    <properties>
     <property name="type" value="door"/>
    </properties>
   </object>
-  <object id="6" gid="879" x="32" y="208" width="16" height="16">
+  <object id="6" name="door" gid="879" x="32" y="208" width="16" height="16">
    <properties>
     <property name="type" value="door"/>
    </properties>
   </object>
-  <object id="7" gid="880" x="48" y="208" width="16" height="16">
+  <object id="7" name="door" gid="880" x="48" y="208" width="16" height="16">
    <properties>
     <property name="type" value="door"/>
    </properties>
   </object>
-  <object id="8" gid="875" x="112" y="224" width="16" height="16">
+  <object id="8" name="door" gid="875" x="112" y="224" width="16" height="16">
    <properties>
     <property name="type" value="door"/>
    </properties>
   </object>
-  <object id="9" gid="876" x="128" y="224" width="16" height="16">
+  <object id="9" name="door" gid="876" x="128" y="224" width="16" height="16">
    <properties>
     <property name="type" value="door"/>
    </properties>
   </object>
-  <object id="10" gid="877" x="176" y="208" width="16" height="16">
+  <object id="10" name="door" gid="877" x="176" y="208" width="16" height="16">
    <properties>
     <property name="type" value="door"/>
    </properties>
   </object>
-  <object id="11" gid="878" x="192" y="208" width="16" height="16">
+  <object id="11" name="door" gid="878" x="192" y="208" width="16" height="16">
    <properties>
     <property name="type" value="door"/>
    </properties>
   </object>
-  <object id="12" gid="144" x="32" y="96" width="16" height="16">
+  <object id="12" name="playerSpawn" gid="144" x="32" y="96" width="16" height="16">
    <properties>
     <property name="type" value="playerSpawn"/>
    </properties>

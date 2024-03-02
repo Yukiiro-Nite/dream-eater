@@ -48,12 +48,12 @@
                  "x":16,
                  "y":0
                 }],
-         "height":16,
+         "height":32,
          "id":1,
          "name":"Background",
          "opacity":1,
          "startx":0,
-         "starty":0,
+         "starty":-16,
          "type":"tilelayer",
          "visible":true,
          "width":32,
@@ -163,7 +163,7 @@
                  "gid":1020,
                  "height":16,
                  "id":5,
-                 "name":"",
+                 "name":"door",
                  "properties":[
                         {
                          "name":"type",
@@ -181,7 +181,7 @@
                  "gid":879,
                  "height":16,
                  "id":6,
-                 "name":"",
+                 "name":"door",
                  "properties":[
                         {
                          "name":"type",
@@ -199,7 +199,7 @@
                  "gid":880,
                  "height":16,
                  "id":7,
-                 "name":"",
+                 "name":"door",
                  "properties":[
                         {
                          "name":"type",
@@ -217,7 +217,7 @@
                  "gid":875,
                  "height":16,
                  "id":8,
-                 "name":"",
+                 "name":"door",
                  "properties":[
                         {
                          "name":"type",
@@ -235,7 +235,7 @@
                  "gid":876,
                  "height":16,
                  "id":9,
-                 "name":"",
+                 "name":"door",
                  "properties":[
                         {
                          "name":"type",
@@ -253,7 +253,7 @@
                  "gid":877,
                  "height":16,
                  "id":10,
-                 "name":"",
+                 "name":"door",
                  "properties":[
                         {
                          "name":"type",
@@ -271,7 +271,7 @@
                  "gid":878,
                  "height":16,
                  "id":11,
-                 "name":"",
+                 "name":"door",
                  "properties":[
                         {
                          "name":"type",
@@ -289,7 +289,7 @@
                  "gid":144,
                  "height":16,
                  "id":12,
-                 "name":"",
+                 "name":"playerSpawn",
                  "properties":[
                         {
                          "name":"type",
