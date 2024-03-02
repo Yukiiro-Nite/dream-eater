@@ -2,9 +2,10 @@ import { Scene } from 'phaser';
 
 export class Game extends Scene
 {
-    camera: Phaser.Cameras.Scene2D.Camera;
-    background: Phaser.GameObjects.Image;
-    msg_text : Phaser.GameObjects.Text;
+    map: Phaser.Tilemaps.Tilemap
+    backgroundLayer: Phaser.Tilemaps.TilemapLayer | null
+    blockingLayer: Phaser.Tilemaps.TilemapLayer | null
+    decorationLayer: Phaser.Tilemaps.TilemapLayer | null
 
     constructor ()
     {
@@ -13,23 +14,20 @@ export class Game extends Scene
 
     create ()
     {
-        this.camera = this.cameras.main;
-        this.camera.setBackgroundColor(0x00ff00);
+        this.map = this.make.tilemap({ key: 'city' })
+        this.map.addTilesetImage('kenny-city', 'cityTiles')
 
-        this.background = this.add.image(512, 384, 'background');
-        this.background.setAlpha(0.5);
+        // create layers
+        this.backgroundLayer = this.map.createLayer('Background', 'cityTiles')
+        this.blockingLayer = this.map.createLayer('Blocking', 'cityTiles')
+        this.decorationLayer = this.map.createLayer('Decoration', 'cityTiles')
 
-        this.msg_text = this.add.text(512, 384, 'Make something fun!\nand share it with us:\nsupport@phaser.io', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
-            stroke: '#000000', strokeThickness: 8,
-            align: 'center'
-        });
-        this.msg_text.setOrigin(0.5);
+        this.map.setCollisionBetween(1, 2000, true, false, 'Blocking')
+
+        this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
 
         this.input.once('pointerdown', () => {
-
             this.scene.start('GameOver');
-
         });
     }
 }

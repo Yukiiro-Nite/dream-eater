@@ -7,16 +7,51 @@
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "city.tmx": {
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 141.33333333333334,
+                "y": 127.33333333333331
+            }
+        },
+        "test-city.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "test-scene.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 267.6666666666667,
+                "y": 237.99999999999997
+            }
+        }
     },
+    "last.exportedFilePath": "C:/Users/Michael/Desktop/programs/dream-eater/public/assets/tilemaps",
     "last.imagePath": "C:/Users/Michael/Desktop/programs/dream-eater/tiled",
     "map.fixedSize": false,
     "map.height": 16,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
     "map.width": 16,
     "openFiles": [
     ],
     "project": "scenes.tiled-project",
     "recentFiles": [
+        "test-scene.tmx",
+        "test-city.tsx"
     ],
-    "tileset.lastUsedFormat": "tsx"
+    "tileset.embedInMap": true,
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.spacing": 0,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
 }

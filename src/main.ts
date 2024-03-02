@@ -13,7 +13,7 @@ const config: Types.Core.GameConfig = {
     width: 512,
     height: 512,
     parent: 'game-container',
-    backgroundColor: '#ff00ff',
+    backgroundColor: '#000000',
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
@@ -26,6 +26,13 @@ const config: Types.Core.GameConfig = {
         GameOver
     ],
     pixelArt: true,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { x: 0, y: 0 },
+            debugShowBody: true
+        }
+    }
 };
 
 export default new Game(config);
