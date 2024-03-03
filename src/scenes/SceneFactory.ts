@@ -1,4 +1,6 @@
 import { Scene, Math } from "phaser"
+import { getObjectsByName } from "../utils/tileUtils"
+import { getAnimationFromDirection } from "../utils/animationUtils"
 
 export const SceneFactory = (
   levelName: string,
@@ -12,7 +14,7 @@ export const SceneFactory = (
     blockingLayer: Phaser.Tilemaps.TilemapLayer
     decorationLayer: Phaser.Tilemaps.TilemapLayer
     doors: Phaser.GameObjects.GameObject[]
-    player: Phaser.GameObjects.GameObject
+    player: Phaser.GameObjects.Sprite
     cursors: Phaser.Types.Input.Keyboard.CursorKeys
     doorsGroup: Phaser.Physics.Arcade.Group
 
@@ -64,8 +66,9 @@ export const SceneFactory = (
         this.doors.forEach((door) => this.doorsGroup.add(door))
 
         // Player setup
-        const player = this.map.createFromObjects('Objects', { name: 'playerSpawn' })[0]
-        if (player) {
+        const playerSpawn = getObjectsByName('playerSpawn', this.map, 'Objects')[0]
+        if (playerSpawn) {
+          const player = this.createPlayer(playerSpawn)
           this.addPlayer(player)
         }
 
@@ -84,6 +87,11 @@ export const SceneFactory = (
 
         playerBody.velocity.x = dir.x * 10 * (delta)
         playerBody.velocity.y = dir.y * 10 * (delta)
+
+        const animKey = getAnimationFromDirection('player', xDir, yDir)
+        if (animKey) {
+          this.player.play({ key: animKey }, true)
+        }
     }
 
     enterDoor (p: any, d: any) {
@@ -101,7 +109,7 @@ export const SceneFactory = (
         }
     }
 
-    async playerEnter (player: Phaser.GameObjects.GameObject, fromDoor: Phaser.GameObjects.GameObject) {
+    async playerEnter (player: Phaser.GameObjects.Sprite, fromDoor: Phaser.GameObjects.GameObject) {
       if (!this.doors) {
         await new Promise((resolve) => {
           this.events.addListener('created', resolve)
@@ -120,8 +128,17 @@ export const SceneFactory = (
       playerBody.position.y = targetDoorBody.position.y + exitY * targetDoorBody.height
     }
 
-    addPlayer (player: Phaser.GameObjects.GameObject) {
+    createPlayer (playerSpawn: Phaser.Types.Tilemaps.TiledObject): Phaser.GameObjects.Sprite {
+      const playerSprite = this.add.sprite(playerSpawn.x as number, playerSpawn.y as number, 'playerDown', 0)
+      playerSprite.scale = 16/24
+
+      return playerSprite
+    }
+
+    addPlayer (player: Phaser.GameObjects.Sprite) {
       this.player = player
+      this.add.existing(this.player)
+
       this.physics.add.existing(this.player, false)
       const playerBody = this.player.body as Phaser.Physics.Arcade.Body
       playerBody.setCollideWorldBounds(true)
