@@ -166,6 +166,31 @@
                  "name":"door",
                  "properties":[
                         {
+                         "name":"doorName",
+                         "type":"string",
+                         "value":"home"
+                        }, 
+                        {
+                         "name":"exitX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"exitY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"targetDoor",
+                         "type":"string",
+                         "value":"home"
+                        }, 
+                        {
+                         "name":"targetScene",
+                         "type":"string",
+                         "value":"home"
+                        }, 
+                        {
                          "name":"type",
                          "type":"string",
                          "value":"door"
@@ -184,6 +209,31 @@
                  "name":"door",
                  "properties":[
                         {
+                         "name":"doorName",
+                         "type":"string",
+                         "value":"mainOffice1"
+                        }, 
+                        {
+                         "name":"exitX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"exitY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"targetDoor",
+                         "type":"string",
+                         "value":"officeEntrance1"
+                        }, 
+                        {
+                         "name":"targetScene",
+                         "type":"string",
+                         "value":"mainOffice"
+                        }, 
+                        {
                          "name":"type",
                          "type":"string",
                          "value":"door"
@@ -201,6 +251,31 @@
                  "id":7,
                  "name":"door",
                  "properties":[
+                        {
+                         "name":"doorName",
+                         "type":"string",
+                         "value":"mainOffice2"
+                        }, 
+                        {
+                         "name":"exitX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"exitY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"targetDoor",
+                         "type":"string",
+                         "value":"officeEntrance2"
+                        }, 
+                        {
+                         "name":"targetScene",
+                         "type":"string",
+                         "value":"mainOffice"
+                        }, 
                         {
                          "name":"type",
                          "type":"string",
@@ -332,5 +407,5 @@
  "tilewidth":16,
  "type":"map",
  "version":"1.10",
- "width":16
+ "width":18
 }

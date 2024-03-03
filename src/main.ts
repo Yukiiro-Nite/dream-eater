@@ -1,10 +1,10 @@
 import { Boot } from './scenes/Boot';
-import { Game as MainGame } from './scenes/Game';
 import { GameOver } from './scenes/GameOver';
 import { MainMenu } from './scenes/MainMenu';
 import { Preloader } from './scenes/Preloader';
 
 import { Game, Types } from "phaser";
+import { SceneFactory } from './scenes/SceneFactory';
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -22,15 +22,20 @@ const config: Types.Core.GameConfig = {
         Boot,
         Preloader,
         MainMenu,
-        MainGame,
-        GameOver
+        GameOver,
+        SceneFactory('city', 'city', 'assets/tilemaps/city.json', [
+            { tilesetName: 'kenny-city', tilesetPath: 'assets/tilemaps/kenny-city.png'}
+        ]),
+        SceneFactory('home', 'home', 'assets/tilemaps/home.json', [
+            { tilesetName: 'kenny-inside', tilesetPath: 'assets/tilemaps/kenny-inside.png'},
+            { tilesetName: 'kenny-rouge', tilesetPath: 'assets/tilemaps/kenny-rogue.png'},
+        ])
     ],
     pixelArt: true,
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { x: 0, y: 0 },
-            debugShowBody: true
         }
     }
 };

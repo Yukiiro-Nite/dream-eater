@@ -11,12 +11,35 @@
             "scaleInDock": 1
         },
         "city.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
             "scale": 3,
-            "selectedLayer": 0,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 141.33333333333334,
-                "y": 127.33333333333331
+                "x": 156,
+                "y": 121.33333333333331
             }
+        },
+        "city.tmx#kenny-city": {
+            "scaleInDock": 1
+        },
+        "home.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 4,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 92.75,
+                "y": 73.25
+            }
+        },
+        "home.tmx#kenny-inside": {
+            "scaleInDock": 2
+        },
+        "home.tmx#kenny-rouge": {
+            "scaleInDock": 3
         },
         "test-city.tsx": {
             "scaleInDock": 1,
@@ -43,13 +66,14 @@
     "openFiles": [
     ],
     "project": "scenes.tiled-project",
+    "property.type": "string",
     "recentFiles": [
         "test-scene.tmx",
         "test-city.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
-    "tileset.spacing": 0,
+    "tileset.spacing": 1,
     "tileset.tileSize": {
         "height": 16,
         "width": 16

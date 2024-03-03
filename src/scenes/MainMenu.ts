@@ -24,11 +24,11 @@ export class MainMenu extends Scene
         }).setOrigin(0.5);
 
         // Go ahead and switch to the game scren for now to make debugging easier.
-        this.scene.start('Game');
+        this.scene.start('city');
 
         this.input.once('pointerdown', () => {
 
-            this.scene.start('Game');
+            this.scene.start('city');
 
         });
     }

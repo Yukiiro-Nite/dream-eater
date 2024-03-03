@@ -111,16 +111,31 @@
  <objectgroup id="3" name="Objects">
   <object id="5" name="door" gid="1020" x="32" y="80" width="16" height="16">
    <properties>
+    <property name="doorName" value="home"/>
+    <property name="exitX" type="float" value="0"/>
+    <property name="exitY" type="float" value="1"/>
+    <property name="targetDoor" value="home"/>
+    <property name="targetScene" value="home"/>
     <property name="type" value="door"/>
    </properties>
   </object>
   <object id="6" name="door" gid="879" x="32" y="208" width="16" height="16">
    <properties>
+    <property name="doorName" value="mainOffice1"/>
+    <property name="exitX" type="float" value="0"/>
+    <property name="exitY" type="float" value="1"/>
+    <property name="targetDoor" value="officeEntrance1"/>
+    <property name="targetScene" value="mainOffice"/>
     <property name="type" value="door"/>
    </properties>
   </object>
   <object id="7" name="door" gid="880" x="48" y="208" width="16" height="16">
    <properties>
+    <property name="doorName" value="mainOffice2"/>
+    <property name="exitX" type="float" value="0"/>
+    <property name="exitY" type="float" value="1"/>
+    <property name="targetDoor" value="officeEntrance2"/>
+    <property name="targetScene" value="mainOffice"/>
     <property name="type" value="door"/>
    </properties>
   </object>
