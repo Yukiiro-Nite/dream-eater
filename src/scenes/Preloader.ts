@@ -34,6 +34,7 @@ export class Preloader extends Scene
         this.load.image('logo', 'logo.png');
 
         // Load character images
+        this.load.spritesheet('empty', 'characters/empty.png', { frameWidth: 16, frameHeight: 16 })
         this.load.spritesheet('playerDown', 'characters/character_v0.1/down.png', { frameWidth: 24, frameHeight: 24 })
         this.load.spritesheet('playerLeft', 'characters/character_v0.1/left.png', { frameWidth: 24, frameHeight: 24 })
         this.load.spritesheet('playerUp', 'characters/character_v0.1/up.png', { frameWidth: 24, frameHeight: 24 })

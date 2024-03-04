@@ -4,6 +4,7 @@ export interface NPCConfig {
   defaultStatement: string | (() => string),
   statements: Record<string, Statement>
   replies: Record<string, Reply[]>
+  texture?: string
 }
 
 export interface Statement {

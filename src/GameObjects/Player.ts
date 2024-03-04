@@ -1,9 +1,12 @@
 import { Math } from 'phaser'
 import { GameLevel } from '../scenes/SceneFactory'
-import { getAnimationFromDirection } from '../utils/animationUtils'
+import { getAnimationFromDirection, getDirectionFromAnimationKey } from '../utils/animationUtils'
 
 export class Player {
+  interacting: boolean
   sprite: Phaser.GameObjects.Sprite
+  animKey?: string
+
   constructor (scene: GameLevel, playerSpawn: Phaser.Types.Tilemaps.TiledObject) {
     this.sprite = scene.add.sprite(playerSpawn.x as number, playerSpawn.y as number, 'playerDown', 0)
     this.sprite.scale = 16/24
@@ -24,6 +27,8 @@ export class Player {
   }
 
   update (cursors: Phaser.Types.Input.Keyboard.CursorKeys, delta: number) {
+    // if (this.interacting) return
+
     const playerBody = this.sprite.body as Phaser.Physics.Arcade.Body
     playerBody.velocity.x = 0
     playerBody.velocity.y = 0
@@ -35,10 +40,27 @@ export class Player {
     playerBody.velocity.x = dir.x * 10 * (delta)
     playerBody.velocity.y = dir.y * 10 * (delta)
 
-    const animKey = getAnimationFromDirection('player', xDir, yDir)
-    if (animKey) {
-      this.sprite.play({ key: animKey }, true)
+    this.animKey = getAnimationFromDirection('player', xDir, yDir)
+    if (this.animKey) {
+      this.sprite.play({ key: this.animKey }, true)
     }
+  }
+
+  interact (scene: GameLevel) {
+    const dir = getDirectionFromAnimationKey(this.animKey)
+    const x = (this.sprite.body?.position.x ?? 0) + dir.x * this.sprite.width / 2
+    const y = (this.sprite.body?.position.y ?? 0) + dir.y * this.sprite.height / 2
+
+    const npc = scene.npcs.filter(npc => {
+      const npcBody = npc.sprite?.body as Phaser.Physics.Arcade.Body
+      if (!npcBody) return
+
+      return npcBody.hitTest(x, y)
+    })[0]
+
+    if (!npc) return
+
+    npc.interact(this)
   }
 
   setVelocity (x: number, y: number) {

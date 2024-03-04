@@ -70,6 +70,9 @@ export const SceneFactory = (
         this.decorationLayer.setDepth(1)
 
         this.cursors = this.input.keyboard?.createCursorKeys() as Phaser.Types.Input.Keyboard.CursorKeys
+        this.cursors.space.addListener('down', () => {
+          this.player?.interact(this)
+        })
 
         // Collisions setup
         this.map.setCollisionBetween(1, 2000, true, true, 'Blocking')
@@ -99,7 +102,7 @@ export const SceneFactory = (
             const npcConfig = getNpcById(npcId)
             if(!npcConfig) return
             
-            return new NPC(this, npcConfig)
+            return new NPC(this, npcConfig, obj)
           })
           .filter(Boolean) as unknown as NPC[]
 
