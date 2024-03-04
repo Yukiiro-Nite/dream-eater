@@ -1,6 +1,23 @@
-import { Scene, Math } from "phaser"
+import { Scene } from "phaser"
 import { getObjectsByName } from "../utils/tileUtils"
-import { getAnimationFromDirection } from "../utils/animationUtils"
+import { NPC } from "../GameObjects/NPC"
+import { getNpcById } from "../data/npcs"
+import { Player } from "../GameObjects/Player"
+
+export interface GameLevel extends Scene {
+  map: Phaser.Tilemaps.Tilemap
+  backgroundLayer: Phaser.Tilemaps.TilemapLayer
+  blockingLayer: Phaser.Tilemaps.TilemapLayer
+  decorationLayer: Phaser.Tilemaps.TilemapLayer
+  doors: Phaser.GameObjects.GameObject[]
+  player: Player
+  cursors: Phaser.Types.Input.Keyboard.CursorKeys
+  doorsGroup: Phaser.Physics.Arcade.Group
+  npcs: NPC[]
+
+  enterDoor: (player: any, door: any) => void
+  playerEnter: (player: Player, fromDoor: Phaser.GameObjects.GameObject) => Promise<void>
+}
 
 export const SceneFactory = (
   levelName: string,
@@ -8,15 +25,16 @@ export const SceneFactory = (
   mapPath: string,
   tilesetPaths: {tilesetName: string, tilesetPath: string}[] 
 ) => {
-  return class GameLevel extends Scene {
+  return class CustomGameLevel extends Scene implements GameLevel {
     map: Phaser.Tilemaps.Tilemap
     backgroundLayer: Phaser.Tilemaps.TilemapLayer
     blockingLayer: Phaser.Tilemaps.TilemapLayer
     decorationLayer: Phaser.Tilemaps.TilemapLayer
     doors: Phaser.GameObjects.GameObject[]
-    player: Phaser.GameObjects.Sprite
+    player: Player
     cursors: Phaser.Types.Input.Keyboard.CursorKeys
     doorsGroup: Phaser.Physics.Arcade.Group
+    npcs: NPC[]
 
     constructor ()
     {
@@ -68,34 +86,32 @@ export const SceneFactory = (
         // Player setup
         const playerSpawn = getObjectsByName('playerSpawn', this.map, 'Objects')[0]
         if (playerSpawn) {
-          const player = this.createPlayer(playerSpawn)
-          this.addPlayer(player)
+          this.player = new Player(this, playerSpawn)
         }
+
+        // NPC setup
+        const npcObjects = getObjectsByName('npc', this.map, 'Objects')
+        this.npcs = npcObjects
+          .map((obj) => {
+            const npcId = obj.properties?.find((prop: {name: string, value: string}) => prop.name === 'npcId')?.value
+            if (!npcId) return
+
+            const npcConfig = getNpcById(npcId)
+            if(!npcConfig) return
+            
+            return new NPC(this, npcConfig)
+          })
+          .filter(Boolean) as unknown as NPC[]
 
         // Emit created event
         this.events.emit('created')
     }
 
     update (time: number, delta: number) {
-        const playerBody = this.player.body as Phaser.Physics.Arcade.Body
-        playerBody.velocity.x = 0
-        playerBody.velocity.y = 0
-
-        const xDir = Number(this.cursors.right.isDown) + Number(this.cursors.left.isDown) * -1
-        const yDir = Number(this.cursors.down.isDown) + Number(this.cursors.up.isDown) * -1
-        const dir = new Math.Vector2(xDir, yDir).normalize()
-
-        playerBody.velocity.x = dir.x * 10 * (delta)
-        playerBody.velocity.y = dir.y * 10 * (delta)
-
-        const animKey = getAnimationFromDirection('player', xDir, yDir)
-        if (animKey) {
-          this.player.play({ key: animKey }, true)
-        }
+      this.player?.update(this.cursors, delta)
     }
 
     enterDoor (p: any, d: any) {
-        const player = p as Phaser.GameObjects.GameObject
         const door = d as Phaser.GameObjects.GameObject
 
         const nextSceneKey = door.data?.get('targetScene')
@@ -103,49 +119,31 @@ export const SceneFactory = (
 
         if (nextScene) {
           this.scene.switch(nextSceneKey)
-          nextScene.playerEnter(player, door)
+          nextScene.playerEnter(this.player, door)
         } else {
           console.warn('Door is not set up correctly or scene does not exist: ', door.data?.getAll())
         }
     }
 
-    async playerEnter (player: Phaser.GameObjects.Sprite, fromDoor: Phaser.GameObjects.GameObject) {
+    async playerEnter (player: Player, fromDoor: Phaser.GameObjects.GameObject) {
       if (!this.doors) {
         await new Promise((resolve) => {
           this.events.addListener('created', resolve)
         })
       }
       
-      this.addPlayer(player)
+      this.player = player
+      this.player.addToScene(this)
+
       const targetDoorName = fromDoor.data.get('targetDoor')
       const targetDoor = this.doors.find((door) => door.data.get('doorName') === targetDoorName)
       const targetDoorBody = targetDoor?.body as Phaser.Physics.Arcade.Body
       const [exitX, exitY]: [number, number] = targetDoor?.data.get(['exitX', 'exitY'])
-      const playerBody = this.player.body as Phaser.Physics.Arcade.Body
-      playerBody.velocity.x = 0
-      playerBody.velocity.y = 0
-      playerBody.position.x = targetDoorBody.position.x + exitX * targetDoorBody.width
-      playerBody.position.y = targetDoorBody.position.y + exitY * targetDoorBody.height
-    }
-
-    createPlayer (playerSpawn: Phaser.Types.Tilemaps.TiledObject): Phaser.GameObjects.Sprite {
-      const playerSprite = this.add.sprite(playerSpawn.x as number, playerSpawn.y as number, 'playerDown', 0)
-      playerSprite.scale = 16/24
-
-      return playerSprite
-    }
-
-    addPlayer (player: Phaser.GameObjects.Sprite) {
-      this.player = player
-      this.add.existing(this.player)
-
-      this.physics.add.existing(this.player, false)
-      const playerBody = this.player.body as Phaser.Physics.Arcade.Body
-      playerBody.setCollideWorldBounds(true)
-
-      this.cameras.main.startFollow(this.player)
-      this.physics.add.collider(this.player, this.blockingLayer)
-      this.physics.add.overlap(this.player, this.doorsGroup, this.enterDoor, undefined, this)
+      this.player.setVelocity(0, 0)
+      this.player.setPosition(
+        targetDoorBody.position.x + exitX * targetDoorBody.width,
+        targetDoorBody.position.y + exitY * targetDoorBody.height
+      )
     }
   }
 }

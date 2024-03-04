@@ -157,6 +157,24 @@
                  "width":16,
                  "x":64,
                  "y":112
+                }, 
+                {
+                 "gid":480,
+                 "height":16,
+                 "id":3,
+                 "name":"npc",
+                 "properties":[
+                        {
+                         "name":"npcId",
+                         "type":"string",
+                         "value":"home-bookshelf"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":16,
+                 "y":64
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -165,7 +183,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":3,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
