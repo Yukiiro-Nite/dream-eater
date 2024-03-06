@@ -1,0 +1,30 @@
+.InteractionWrapper {
+  position: relative;
+  box-sizing: border-box;
+  border: double 3px white;
+  padding: 1rem;
+  background-color: #00000080;
+}
+
+.InteractionWrapper h1 {
+  margin: 0 0 1rem 0;
+  line-height: 1;
+}
+
+.InteractionWrapper p {
+  margin: 0;
+}
+
+.ReplyWrapper {
+  position: absolute;
+  box-sizing: border-box;
+  margin-top: calc(1rem + 3px);
+  margin-left: calc(-1rem - 3px);
+  padding: 1rem;
+  border: double 3px white;
+  border-top: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #00000080;
+}

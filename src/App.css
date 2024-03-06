@@ -1,0 +1,34 @@
+.OverlayWrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  background-color: #00000080;
+  transition: opacity 0.5s ease-in;
+
+  font-family: "Silkscreen", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.OverlayWrapper.hasOverlay {
+  backdrop-filter: blur(1px);
+  opacity: 1;
+}
+
+.OverlayWrapper .InnerWrapper {
+  position: absolute;
+  width: 100vmin;
+  height: 100vmin;
+  margin: calc((100vh - 100vmin) / 2) calc((100vw - 100vmin) / 2);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s 0.5s ease-in;
+}
+
+.OverlayWrapper .InnerWrapper.visible {
+  pointer-events: visible;
+  opacity: 1;
+}

@@ -5,6 +5,7 @@ import { Preloader } from './scenes/Preloader';
 
 import { Game, Types } from "phaser";
 import { SceneFactory } from './scenes/SceneFactory';
+import { useAppStore } from './stores/appStore';
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -39,5 +40,16 @@ const config: Types.Core.GameConfig = {
         }
     }
 };
+export const game = new Game(config);
 
-export default new Game(config);
+useAppStore.subscribe(
+  (state) => state.overlay,
+  (overlay) => {
+      // I might change this behavior to only have certain overlays pause the game.
+      if (overlay) {
+          game.pause()
+      } else {
+          game.resume()
+      }
+  }
+)

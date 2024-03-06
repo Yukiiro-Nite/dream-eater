@@ -1,4 +1,6 @@
-import { NPCConfig, Statement } from '../data/npcs'
+import { NPCConfig, Statement, getDefaultStatement } from '../data/npcs'
+import { useAppStore } from '../stores/appStore'
+import { useInteractionStore } from '../stores/interactionStore'
 import { Player } from './Player'
 
 export class NPC {
@@ -16,43 +18,18 @@ export class NPC {
     this.sprite = scene.add.sprite(x, y, config.texture || 'empty', 0)
     scene.physics.add.existing(this.sprite, false)
   }
-
-  getDefaultStatement (): Statement | undefined {
-    const defaultStatementConf = this.config.defaultStatement
-    let defaultStatement
-    if (typeof defaultStatementConf === 'function') {
-      defaultStatement = defaultStatementConf()
-    } else {
-      defaultStatement = defaultStatementConf
-    }
-
-    if (!defaultStatement) {
-      console.warn(`NPC ${this.config.id} is not configured correctly, please set a defaultStatement`)
-      return
-    }
-
-    const statement = this.config.statements[defaultStatement]
-
-    if (!statement) {
-      console.warn(`NPC ${this.config.id} does not have a statement for: `, defaultStatement)
-      return
-    }
-
-    return statement
-  }
   
   interact (player: Player) {
-    const statement = this.getDefaultStatement()
+    const statement = getDefaultStatement(this.config.id)
     if (!statement) return
+
+    const { setNpcId, setStatement } = useInteractionStore.getState()
+    const { setOverlay } = useAppStore.getState()
     
     player.interacting = true
     this.interactingPlayer = player
-    this.showInteraction(statement)
-  }
-
-  showInteraction (statement: Statement) {
-    // Looks like Phaser doesn't have alot for handling UI
-    // So I guess I'll have to use HTML.
-    console.log(statement.text)
+    setNpcId(this.config.id)
+    setStatement(statement)
+    setOverlay('interaction')
   }
 }

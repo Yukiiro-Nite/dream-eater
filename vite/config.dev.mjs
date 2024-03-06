@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import reactRefresh from '@vitejs/plugin-react-refresh';
 
 export default defineConfig({
     base: './',
@@ -13,5 +14,6 @@ export default defineConfig({
     },
     server: {
         port: 8080
-    }
+    },
+    plugins: [reactRefresh()]
 });
