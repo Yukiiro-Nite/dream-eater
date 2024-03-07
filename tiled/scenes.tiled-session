@@ -17,11 +17,25 @@
             "scale": 3,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 155.66666666666663,
-                "y": 120.99999999999999
+                "x": 154.66666666666663,
+                "y": 119.66666666666669
             }
         },
         "city.tmx#kenny-city": {
+            "scaleInDock": 1
+        },
+        "city_dream_corp_exterior.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 3,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 110.33333333333334,
+                "y": 117.33333333333331
+            }
+        },
+        "city_dream_corp_exterior.tmx#kenny-city": {
             "scaleInDock": 1
         },
         "home.tmx": {
@@ -31,8 +45,8 @@
             "scale": 4,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 92.75,
-                "y": 73.25
+                "x": 92.5,
+                "y": 73
             }
         },
         "home.tmx#kenny-inside": {

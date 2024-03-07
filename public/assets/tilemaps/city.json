@@ -64,7 +64,7 @@
          "chunks":[
                 {
                  "data":[0, 1, 3, 2, 719, 720, 720, 720, 720, 720, 720, 720, 721, 723, 681, 0,
-                    0, 38, 40, 39, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 681,
+                    0, 38, 40, 39, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 187, 188, 189, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 187, 188, 189, 0, 0, 0, 0, 0, 0, 0, 664, 665, 666, 0, 0,
                     0, 298, 0, 300, 957, 958, 959, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -86,7 +86,7 @@
                 }, 
                 {
                  "data":[0, 681, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    681, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -377,6 +377,92 @@
                  "width":16,
                  "x":32,
                  "y":96
+                }, 
+                {
+                 "gid":1823,
+                 "height":16,
+                 "id":13,
+                 "name":"door",
+                 "properties":[
+                        {
+                         "name":"doorName",
+                         "type":"string",
+                         "value":"corpExteriorEntrance1"
+                        }, 
+                        {
+                         "name":"exitX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"exitY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"targetDoor",
+                         "type":"string",
+                         "value":"corpExteriorExit1"
+                        }, 
+                        {
+                         "name":"targetScene",
+                         "type":"string",
+                         "value":"corpExterior"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"door"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":240,
+                 "y":16
+                }, 
+                {
+                 "gid":1824,
+                 "height":16,
+                 "id":14,
+                 "name":"door",
+                 "properties":[
+                        {
+                         "name":"doorName",
+                         "type":"string",
+                         "value":"corpExteriorEntrance2"
+                        }, 
+                        {
+                         "name":"exitX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"exitY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"targetDoor",
+                         "type":"string",
+                         "value":"corpExteriorExit2"
+                        }, 
+                        {
+                         "name":"targetScene",
+                         "type":"string",
+                         "value":"corpExterior"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"door"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":256,
+                 "y":16
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -385,7 +471,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":13,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
@@ -403,9 +489,13 @@
          "tilecount":1036,
          "tileheight":16,
          "tilewidth":16
+        }, 
+        {
+         "firstgid":1037,
+         "source":"..\/..\/..\/tiled\/kenny-city.tsx"
         }],
  "tilewidth":16,
  "type":"map",
  "version":"1.10",
- "width":18
+ "width":16
 }

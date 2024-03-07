@@ -6,6 +6,7 @@ import { Preloader } from './scenes/Preloader';
 import { Game, Types } from "phaser";
 import { SceneFactory } from './scenes/SceneFactory';
 import { useAppStore } from './stores/appStore';
+import { scenes } from './data/scenes';
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -24,13 +25,12 @@ const config: Types.Core.GameConfig = {
         Preloader,
         MainMenu,
         GameOver,
-        SceneFactory('city', 'city', 'assets/tilemaps/city.json', [
-            { tilesetName: 'kenny-city', tilesetPath: 'assets/tilemaps/kenny-city.png'}
-        ]),
-        SceneFactory('home', 'home', 'assets/tilemaps/home.json', [
-            { tilesetName: 'kenny-inside', tilesetPath: 'assets/tilemaps/kenny-inside.png'},
-            { tilesetName: 'kenny-rouge', tilesetPath: 'assets/tilemaps/kenny-rogue.png'},
-        ])
+        ...scenes.map(sceneConfig => SceneFactory(
+            sceneConfig.levelName,
+            sceneConfig.mapName,
+            sceneConfig.mapPath,
+            sceneConfig.tilesets
+        ))
     ],
     pixelArt: true,
     physics: {
